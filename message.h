@@ -11,6 +11,10 @@ public:
     Message(string binary);
     static string IntToBinary(int n);
     static int BinaryToInt(string binary);
+    int getInt() const;
+    string getBin() const;
+    void setInt(int v);
+    void setBin(string s);
 private:
     int m_int;
     string m_bin;

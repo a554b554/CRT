@@ -7,7 +7,7 @@ Message::Message()
 }
 
 Message::Message(int num):m_int(num){
-    assert(m_int>0);
+    assert(m_int>=0);
     m_bin = IntToBinary(num);
 }
 
@@ -29,8 +29,8 @@ string Message::IntToBinary(int n){
 
 int Message::BinaryToInt(string binary){
     int ans=0;
-    int n = binary.length();
-    for(int i=0; i<n; i++){
+    size_t n = binary.length();
+    for(size_t i=0; i<n; i++){
         if(binary[i]=='0'){
             continue;
         }
@@ -44,3 +44,25 @@ int Message::BinaryToInt(string binary){
     }
     return ans;
 }
+
+int Message::getInt() const{
+    return m_int;
+}
+
+string Message::getBin() const{
+    return m_bin;
+}
+
+void Message::setBin(string s){
+    m_bin=s;
+    m_int=BinaryToInt(s);
+}
+
+void Message::setInt(int v){
+    m_int=v;
+    m_bin=IntToBinary(v);
+}
+
+
+
+
