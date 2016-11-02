@@ -63,11 +63,62 @@ void testerrordecode(){
     cout<<"time: "<<time<<endl;
 }
 
+//please read this sample
+void Sample(){
+    //assume we want to encode '10110100'(8bit) to 'ABCDE'. capacity of ABCDE are '13 7 15 17 11', respectively.
+    //fisrt we create a message that present the information we want to encode.
+    Message m("10110100");
+    
+    //we can check the value in m.
+    cout<<"binary m: "<<m.getBin()<<" "<<"int m: "<<m.getInt()<<endl;
+    
+    //if you want, you can also create m by a int value.
+    // Message m(180);
+    
+    //then we create CRTcode for 'ABCDE'
+    CRTCode code(vector<int>{13,7,15,17,11}); //must make sure basis are co-prime.
+    
+    
+    //encoding
+    code.encode(m);
+    
+    //we can check the encode result
+    vector<int> encoderesult = code.getVals();
+    for (int i=0; i<encoderesult.size(); i++) {
+        cout<<m.getInt()<<" mod "<<code.getBasis()[i]<<" is "<<encoderesult[i]<<endl;
+    }
+    
+    
+    //if we want to decode, first we must know the encode range.
+    //since our encode message is 8-bits, so the range is 0-255, totally 256.
+    //next we create a message to store the decoded information
+    Message decoded;
+    
+    //decoding
+    code.decode(decoded, 256);
+    
+    //we can check the decode result.
+    cout<<"origin message: "<<m.getBin()<<endl;
+    cout<<"decode message: "<<decoded.getBin()<<endl;
+    
+    //if we have a transition error, for example
+    encoderesult[0] -= 2;
+    code.setvals(encoderesult);
+    //we can still decode
+    Message errordecode;
+    code.decode(errordecode, 256);
+    cout<<"error decode message: "<<errordecode.getBin()<<endl;
+}
+
+
+
+
 int main(int argc, char *argv[])
 {
 //    testintandbinary();
 //    testencode();
-    testerrordecode();
+//    testerrordecode();
 //    testCRT();
+    Sample();
     return 0;
 }

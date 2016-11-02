@@ -51,6 +51,7 @@ void CRTCode::setbasis(vector<int> b){
 
 void CRTCode::setvals(vector<int> v){
     assert(v.size()==basis.size());
+    vals.clear();
     for (int i=0; i<basis.size(); i++) {
         assert(v[i]<basis[i]);
         vals.push_back(v[i]);
