@@ -36,6 +36,7 @@ private:
 };
 
 int CRT(const vector<int>& vals, const vector<int>& basis);
+int co_prime(const vector<int>& input, vector<int>& output);
 
 
 #endif // CRTCODE_H

@@ -175,4 +175,67 @@ void CRTCode::printVals(){
     cout<<endl;
 }
 
+bool is_coprime(const vector<int>& input){
+    for (int i=0; i<input.size(); i++) {
+        for (int j=i+1; j<input.size(); j++) {
+            if (input[i]==input[j]) {
+                return false;
+            }
+            if (gcd(input[i], input[j]) != 1) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+int evaluatecount=0;
+
+
+int co_prime(const vector<int>& input, vector<int>& output){
+    int max=0;
+    int mid=0;
+    output.clear();
+    vector<int> current = input;
+    vector<vector<int>> s;
+    
+    while (1) {
+        bool flag=true;
+        for (int i=0; i<current.size(); i++) {
+            if (current[i]!=2) {
+                flag=false;
+            }
+        }
+        if (flag) {
+            break;
+        }
+        current[0]--;
+        for (int i=0; i<current.size(); i++) {
+            if (current[i]<2) {
+                current[i]=input[i];
+                current[i+1]--;
+            }
+        }
+        if(is_coprime(current)){
+            s.push_back(current);
+        }
+    }
+    
+    if (s.empty()) {
+        return -1;
+    }
+    
+    for (int i=0; i<s.size(); i++) {
+        int mul=1;
+        for (int j=0; j<s[i].size(); j++) {
+            mul*=s[i][j];
+        }
+        if (mul>max) {
+            max = mul;
+            mid = i;
+        }
+    }
+    
+    output = s[mid];
+    return max;
+}
 

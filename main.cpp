@@ -63,6 +63,17 @@ void testerrordecode(){
     cout<<"time: "<<time<<endl;
 }
 
+void testcoprime(){
+    vector<int> input{10,10,10,10};
+    vector<int> output;
+    cout<<co_prime(input, output)<<endl;
+    for (int i=0; i<output.size(); i++) {
+        cout<<output[i]<<" ";
+    }
+    cout<<endl;
+}
+
+
 //please read this sample
 void Sample(){
     //assume we want to encode '10110100'(8bit) to 'ABCDE'. capacity of ABCDE are '13 7 15 17 11', respectively.
@@ -119,6 +130,7 @@ int main(int argc, char *argv[])
 //    testencode();
 //    testerrordecode();
 //    testCRT();
-    Sample();
+    testcoprime();
+//    Sample();
     return 0;
 }
